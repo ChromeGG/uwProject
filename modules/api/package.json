@@ -1,0 +1,35 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "jest",
+    "knex": "knex"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "^8.0.1",
+    "@hapi/hapi": "^18.4.0",
+    "@hapi/inert": "^5.2.2",
+    "@hapi/joi": "^16.1.8",
+    "@hapi/vision": "^5.5.4",
+    "dotenv": "^8.0.0",
+    "hapi-swagger": "^11.0.1",
+    "html-to-json-data": "~1.6.0",
+    "knex": "^0.20.2",
+    "objection": "^1.6.11",
+    "pg": "^7.14.0",
+    "ramda": "^0.26.1",
+    "tabletojson": "^1.0.4"
+  },
+  "devDependencies": {
+    "faker": "4.1.0",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.1",
+    "querystring": "^0.2.0"
+  }
+}

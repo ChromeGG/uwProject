@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+# Detect if sudo needed
+USER="$(whoami)"
+SUDO=""
+if [ ! "${USER}" == "root" ]; then
+  SUDO=$(id -Gn $USER | grep -q docker) || SUDO="sudo "
+fi
+
+DOCKER="${SUDO}docker"
+COMPOSE="${SUDO}docker-compose"
+SSH_KEY=${SSH_KEY:-~/.ssh/id_dsa}
+
+PG_USER="karta-kredytowa"
+PG_DB="karta-kredytowa"
+
+function die() {
+  echo >&2 "$@"
+  exit 1
+}
+
+function info() {
+  echo -e "\e[33m$@\e[0m"
+}
+
+function installDependencies() {
+  info "Installing latest dependencies..."
+  ${COMPOSE} run --rm \
+    -u $(id -u):node \
+    app \
+    yarn install
+}
+
+function runDatabaseMigrations() {
+  info "Running database migrations..."
+  ${COMPOSE} exec --user $(id -u):node \
+    app bash -c "cd modules/api && yarn knex migrate:latest && NODE_ENV=test yarn knex migrate:latest"
+}
+
+function runDatabaseSeeds() {
+  info "Running database seeds..."
+  ${COMPOSE} exec --user $(id -u):node \
+    app bash -c "cd modules/api && yarn knex seed:run"
+}
+
+function start() {
+  ${COMPOSE} stop
+
+  info "Checking for new docker images..."
+  ${COMPOSE} pull
+
+  [[ "$@" =~ --skipDependencies ]] || installDependencies
+
+  info "Starting app stack..."
+  ${COMPOSE} up -d
+
+  sleep 2
+
+  runDatabaseMigrations
+
+  ${COMPOSE} ps
+}
+
+if [ $# -gt 0 ]; then
+
+  if [ "$1" == "start" ]; then
+    shift 1
+    start $@
+
+  elif [ "$1" == app ]; then
+    shift 1
+    ARGS="$@"
+    ${COMPOSE} exec --user $(id -u):node \
+      app bash -c "$ARGS"
+
+  elif [ "$1" == "reset" ]; then
+    info "Stopping and removing docker containers..."
+    ${COMPOSE} rm -v --force --stop
+    start
+    runDatabaseSeeds
+
+  elif [ "$1" == "yarn" ]; then
+    shift 1
+    ${COMPOSE} run --rm \
+      -u $(id -u):node \
+      app \
+      yarn "$@"
+
+  elif [[ -d "modules/${1}" ]]; then
+    MODULE=$1
+    shift 1
+    ARGS="$@"
+    ${COMPOSE} exec --user $(id -u):node \
+      app bash -c "cd modules/$MODULE && $ARGS"
+
+  elif [ "$1" == "clean" ]; then
+    shift 1
+    ${DOCKER} volume ls -qf dangling=true | xargs -r ${DOCKER} volume rm
+    ${DOCKER} images -q --no-trunc | xargs -r ${DOCKER} rmi || true
+
+  else
+    ${COMPOSE} "$@"
+  fi
+else
+  ${COMPOSE} ps
+fi

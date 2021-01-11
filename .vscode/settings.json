@@ -1,0 +1,32 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.idea": true,
+    "**/.vscode": true,
+    "**/.yarn-cache": true,
+    "node_modules/web": true,
+    "node_modules/api": true
+  },
+  "explorer.openEditors.visible": 0,
+  "editor.minimap.enabled": false,
+  "workbench.editor.highlightModifiedTabs": true,
+  "editor.cursorBlinking": "smooth",
+  "workbench.editor.enablePreview": true,
+  "eslint.validate": ["javascript", { "autoFix": true, "language": "vue" }],
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "[html]": {
+    "editor.tabSize": 2
+  },
+  "vetur.format.defaultFormatter.html": "prettyhtml",
+  "vetur.format.defaultFormatterOptions": {
+    "prettyhtml": {
+      "printWidth": 130,
+      "singleQuote": false
+    }
+  }
+}

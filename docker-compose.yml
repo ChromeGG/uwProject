@@ -1,0 +1,33 @@
+version: "2"
+services:
+  app:
+    image: gzero/node-image:v4.0
+    restart: "no"
+    ports:
+      - 3000:3000
+      - 8080:8080
+    volumes:
+      - .:/app
+      - yarn-cache:/.yarn-cache
+
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: games_stats
+      POSTGRES_USER: games_stats
+    ports:
+      - 5432:5432
+
+  db-tests:
+    image: postgres:11
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: games_stats
+      POSTGRES_USER: games_stats
+    ports:
+      - 5433:5432
+
+volumes:
+  yarn-cache:
+    driver: "local"
