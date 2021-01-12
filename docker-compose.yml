@@ -14,8 +14,8 @@ services:
     image: postgres:11
     environment:
       POSTGRES_PASSWORD: test
-      POSTGRES_DB: games_stats
-      POSTGRES_USER: games_stats
+      POSTGRES_DB: karta_kredytowa
+      POSTGRES_USER: karta_kredytowa
     ports:
       - 5432:5432
 
@@ -23,8 +23,8 @@ services:
     image: postgres:11
     environment:
       POSTGRES_PASSWORD: test
-      POSTGRES_DB: games_stats
-      POSTGRES_USER: games_stats
+      POSTGRES_DB: karta_kredytowa
+      POSTGRES_USER: karta_kredytowa
     ports:
       - 5433:5432
 

@@ -10,8 +10,8 @@ const commonConfig = {
     debug: false,
     asyncStackTraces: false,
     connection: {
-      user: 'games_stats',
-      database: 'games_stats',
+      user: 'karta_kredytowa',
+      database: 'karta_kredytowa',
       password: 'test',
       port: 5432
     },
