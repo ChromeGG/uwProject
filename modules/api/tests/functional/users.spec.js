@@ -2,32 +2,32 @@ const { functional } = require('../setup')
 
 const { Tester } = functional()
 
-describe('GET /tags', () => {
-  test('should return empty array when no tags are found', async () => {
-    const { statusCode, payload } = await Tester.request('GET', '/tags')
+describe('GET /users', () => {
+  test('should return empty array when no users are found', async () => {
+    const { statusCode, payload } = await Tester.request('GET', '/users')
 
     expect(statusCode).toEqual(200)
     expect(payload.results).toEqual([])
   })
 
-  test('should return only one tag', async () => {
-    const tag = await Tester.hasTag()
+  test('should return only one user', async () => {
+    const user = await Tester.hasTag()
 
-    const { statusCode, payload } = await Tester.request('GET', '/tags')
+    const { statusCode, payload } = await Tester.request('GET', '/users')
 
     expect(statusCode).toEqual(200)
     expect(payload.results).toHaveLength(1)
     expect(payload.results).toContainObject({
-      id: tag.id,
-      name: tag.name
+      id: user.id,
+      name: user.name
     })
   })
 
-  test('should return multiple tags', async () => {
+  test('should return multiple users', async () => {
     const tag1 = await Tester.hasTag()
     const tag2 = await Tester.hasTag()
 
-    const { statusCode, payload } = await Tester.request('GET', '/tags')
+    const { statusCode, payload } = await Tester.request('GET', '/users')
 
     expect(statusCode).toEqual(200)
     expect(payload.results).toHaveLength(2)
@@ -48,7 +48,7 @@ describe('GET /tags', () => {
       Tester.hasTag('xDlol')
     ])
 
-    const { statusCode, payload } = await Tester.request('GET', '/tags', {
+    const { statusCode, payload } = await Tester.request('GET', '/users', {
       query: { page: 0, perPage: 10, query: 'lol' }
     })
 
@@ -72,7 +72,7 @@ describe('GET /tags', () => {
       Tester.hasTag('xDlol')
     ])
 
-    const { statusCode, payload } = await Tester.request('GET', '/tags', {
+    const { statusCode, payload } = await Tester.request('GET', '/users', {
       query: { page: 0, perPage: 2 }
     })
 
@@ -82,43 +82,48 @@ describe('GET /tags', () => {
   })
 })
 
-describe('POST /tags', () => {
-  test('should validate payload', async () => {
-    const { statusCode, payload } = await Tester.request('POST', '/tags', {
-      payload: {
-        lol: 'testTag'
-      }
-    })
+describe('POST /users', () => {
+  // test('should validate payload', async () => {
+  //   const { statusCode, payload } = await Tester.request('POST', '/users', {
+  //     payload: {
+  //       lol: 'testTag'
+  //     }
+  //   })
 
-    expect(statusCode).toEqual(422)
-    expect(payload).toMatchObject({
-      errors: {
-        lol: ['"lol" is not allowed'],
-        name: ['"name" is required']
-      },
-      message: 'Unprocessable Entity',
-      statusCode: 422
-    })
-  })
+  //   expect(statusCode).toEqual(422)
+  //   expect(payload).toMatchObject({
+  //     errors: {
+  //       lol: ['"lol" is not allowed'],
+  //       name: ['"name" is required']
+  //     },
+  //     message: 'Unprocessable Entity',
+  //     statusCode: 422
+  //   })
+  // })
 
-  test('should create new tag', async () => {
-    const { statusCode, payload } = await Tester.request('POST', '/tags', {
+  test('should create new user', async () => {
+    const { statusCode, payload } = await Tester.request('POST', '/users', {
       payload: {
-        name: 'testTag'
+        nickname: 'Tester 1'
       }
     })
 
     expect(statusCode).toEqual(201)
     expect(payload).toMatchObject({
-      id: expect.any(Number),
-      name: 'testTag'
+      id: expect.any(String),
+      nickname: 'Tester 1'
+    })
+
+    const resultInDb = await Tester.grabFirstFromDatabase('users')
+    expect(resultInDb).toMatchObject({
+      nickname: 'Tester 1'
     })
   })
 
-  test('should fail when trying to create tag with already existing name', async () => {
+  test('should fail when trying to create user with already existing name', async () => {
     await Tester.hasTag('testTag')
 
-    const { statusCode, payload } = await Tester.request('POST', '/tags', {
+    const { statusCode, payload } = await Tester.request('POST', '/users', {
       payload: {
         name: 'testTag'
       }
@@ -135,13 +140,13 @@ describe('POST /tags', () => {
   })
 })
 
-describe('DELETE /tags/{tagId}', () => {
-  test('should return 204 and no body after removing tag', async () => {
-    const tag = await Tester.hasTag()
+describe('DELETE /users/{tagId}', () => {
+  test('should return 204 and no body after removing user', async () => {
+    const user = await Tester.hasTag()
 
     const { statusCode, payload } = await Tester.request(
       'DELETE',
-      `/tags/${tag.id}`
+      `/users/${user.id}`
     )
 
     expect(statusCode).toEqual(204)
@@ -149,13 +154,13 @@ describe('DELETE /tags/{tagId}', () => {
   })
 })
 
-describe('PATCH /tags/{tagId}', () => {
-  test('should change name of created tag', async () => {
-    const tag = await Tester.hasTag()
+describe('PATCH /users/{tagId}', () => {
+  test('should change name of created user', async () => {
+    const user = await Tester.hasTag()
 
     const { statusCode, payload } = await Tester.request(
       'PATCH',
-      `/tags/${tag.id}`,
+      `/users/${user.id}`,
       {
         payload: {
           name: 'newTag'
@@ -173,25 +178,25 @@ describe('PATCH /tags/{tagId}', () => {
   })
 
   test('should success if name is the same as name being changed', async () => {
-    const tag = await Tester.hasTag('oldName')
+    const user = await Tester.hasTag('oldName')
 
-    const { payload } = await Tester.request('PATCH', `/tags/${tag.id}`, {
+    const { payload } = await Tester.request('PATCH', `/users/${user.id}`, {
       payload: {
         name: 'oldName'
       }
     })
 
     expect(payload).toMatchObject({
-      id: tag.id,
+      id: user.id,
       name: 'oldName'
     })
   })
 
-  test('should fail if name is already taken by other tag', async () => {
+  test('should fail if name is already taken by other user', async () => {
     await Tester.hasTag('newName')
-    const tag = await Tester.hasTag('oldName')
+    const user = await Tester.hasTag('oldName')
 
-    const { payload } = await Tester.request('PATCH', `/tags/${tag.id}`, {
+    const { payload } = await Tester.request('PATCH', `/users/${user.id}`, {
       payload: {
         name: 'newName'
       }

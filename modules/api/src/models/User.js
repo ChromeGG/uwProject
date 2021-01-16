@@ -2,7 +2,7 @@ const Base = require('./Base')
 
 class User extends Base {
   static get tableName() {
-    return 'expenses'
+    return 'users'
   }
 
   static get jsonSchema() {
@@ -11,8 +11,8 @@ class User extends Base {
       required: [],
 
       properties: {
-        id: { type: 'integer' },
-        nickname: { type: 'integer' },
+        id: { type: 'string' },
+        nickname: { type: 'string' },
         createdAt: { type: 'timestamp' },
         updatedAt: { type: 'timestamp' }
       }

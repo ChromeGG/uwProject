@@ -3061,7 +3061,7 @@ ajv@^5.2.3, ajv@^5.3.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5, ajv@^6.9.1:
+ajv@^6.1.0, ajv@^6.10.2, ajv@^6.5.5, ajv@^6.9.1:
   version "6.10.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.10.2.tgz#d3cea04d6b017b2894ad69040fec8b623eb4bd52"
   integrity sha512-TXtUUEYHuaTEbLZWIKUr5pmBuhDLy+8KYtPYdcV8qC+pOZL+NKqYwvWSRrVXHn+ZmRRAu8vJTAznH7Oag6RVRw==
@@ -3071,7 +3071,7 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5, ajv@^6.9.1:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
+ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5, ajv@^6.12.6:
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
   integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
@@ -5001,6 +5001,11 @@ dateformat@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
+
+db-errors@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/db-errors/-/db-errors-0.2.3.tgz#a6a38952e00b20e790f2695a6446b3c65497ffa2"
+  integrity sha512-OOgqgDuCavHXjYSJoV2yGhv6SeG8nk42aoCSoyXLZUH7VwFG27rxbavU1z+VrZbZjphw5UkDQwUlD21MwZpUng==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -10059,14 +10064,13 @@ object.values@^1.1.0:
     function-bind "^1.1.1"
     has "^1.0.3"
 
-objection@^1.6.11:
-  version "1.6.11"
-  resolved "https://registry.yarnpkg.com/objection/-/objection-1.6.11.tgz#6755c15300277eee76c44faf4295704d8e2e02e2"
-  integrity sha512-/W6iR6+YvFg1U4k5DyX1MrY+xqodDM8AAOU1J0b3HlptsNw8V3uDHjZgTi1cFPPe5+ZeTTMvhIFhNiUP6+nqYQ==
+objection@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/objection/-/objection-2.2.7.tgz#0e3773d8dfeca4b22fa0d0d5019c599e8b078972"
+  integrity sha512-B/joqs+HFi/v3LzQxuO9JBca+0JkOXt/qfLs9kNCNbOX6pbvsAflaNxB2p7tpe9JI6gUm81qJ8Khje/70CcXfw==
   dependencies:
-    ajv "^6.10.0"
-    bluebird "^3.5.5"
-    lodash "^4.17.11"
+    ajv "^6.12.6"
+    db-errors "^0.2.3"
 
 obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"

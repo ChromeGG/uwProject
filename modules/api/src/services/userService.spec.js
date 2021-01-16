@@ -4,14 +4,19 @@ const { db, Tester } = integration()
 
 const service = require('./userService')
 
-describe('createExpenses', () => {
+describe('createUser', () => {
   test('should create a user', async () => {
-    await service.importExpenses(db, {
+    await service.createUser(db, {
       nickname: 'Joe'
     })
 
-    const users = await Tester.grabFromDatabase('users')
-    console.log(users)
+    const [user] = await Tester.grabFromDatabase('users')
+
+    expect(user).toMatchObject({
+      nickname: 'Joe'
+    })
+    // const users = await Tester.grabFromDatabase('users')
+    // console.log(users)
     // const expensesFromDB = await Tester.grabFromDatabase('expenses')
 
     // expect(importsFromDB).toHaveLength(1)
