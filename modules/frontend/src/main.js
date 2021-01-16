@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify'
 import Home from './components/Home.vue'
 import Imports from './components/Imports.vue'
 import Expenses from './components/Expenses.vue'
-import Tags from './components/Tags.vue'
+import Users from './components/Users.vue'
 import Reports from './components/Reports.vue'
 import { format } from 'date-fns'
 
@@ -14,10 +14,22 @@ Vue.use(VueRouter)
 
 Vue.config.productionTip = false
 
-Axios.defaults.baseURL = 'http://localhost:3000'
-Axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+const myTransformResponse = (data) => {
+  if (data.length) {
+    data.map(x => {
+      if (x.createdAt || x.updatedAt) {
+        x.createdAt = format(new Date(x.createdAt), 'dd-MM-yyyy hh:mm')
+        x.updatedAt = format(new Date(x.updatedAt), 'dd-MM-yyyy hh:mm')
+      }
+    })
+  }
+  return data
+}
 
-Vue.prototype.$http = Axios
+Vue.prototype.$http = Axios.create({
+  baseURL: 'http://localhost:3000',
+  transformResponse: [].concat(Axios.defaults.transformResponse, myTransformResponse)
+})
 
 Vue.filter('parseCurrency', function(value) {
   if (value) {
@@ -41,7 +53,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/imports', component: Imports },
   { path: '/expenses', component: Expenses },
-  { path: '/tags', component: Tags },
+  { path: '/users', component: Users },
   { path: '/reports', component: Reports },
   { path: '*', redirect: '/' }
 ]
@@ -53,5 +65,5 @@ const router = new VueRouter({
 new Vue({
   router,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')
