@@ -2,7 +2,7 @@ const { functional } = require('../setup')
 
 const { Tester } = functional()
 
-test('should return 200 on /health check endpoint', async () => {
+test('should return statusCode 200 on /health check endpoint', async () => {
   // 1. Setup
   // 2. Test
   const { statusCode, payload } = await Tester.request('GET', '/health')

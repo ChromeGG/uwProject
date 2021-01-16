@@ -1,5 +1,5 @@
-const Import = require('../models/Import')
-const Expenses = require('../models/Expense')
+const Import = require('../models/GameType')
+const Expenses = require('../models/User')
 const Boom = require('@hapi/boom')
 
 exports.getImports = async db => Import.query(db)

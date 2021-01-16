@@ -1,5 +1,5 @@
 const faker = require('faker')
-const { createTag } = require('../../services/tagsService')
+const { createUser: createTag } = require('../../services/userService')
 
 module.exports = db => {
   const hasTag = async name => {

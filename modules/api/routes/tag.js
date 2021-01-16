@@ -1,9 +1,9 @@
 const Joi = require('@hapi/joi')
 const {
-  createTag,
+  createUser: createTag,
   updateTag,
   deleteTag
-} = require('../src/services/tagsService')
+} = require('../src/services/userService')
 const { getTags } = require('../src/readers/tagsReader')
 
 module.exports = [
