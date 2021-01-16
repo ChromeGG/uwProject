@@ -49,11 +49,4 @@ Cały kod podzielony jest na kilka części:
 - tesy - framework jest.js
 
 Frontend
-
 Vue 2.6 z Vuetify 
-
-### Konwencje
-
-Nazwy commitów mergowanych do mastera powinny wyglądać następująco
-
-Issue #<numer ticketu>: <krótki opis ticketu po angielsku z małej litery>

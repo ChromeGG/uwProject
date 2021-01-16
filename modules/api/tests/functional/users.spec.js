@@ -7,79 +7,80 @@ describe('GET /users', () => {
     const { statusCode, payload } = await Tester.request('GET', '/users')
 
     expect(statusCode).toEqual(200)
-    expect(payload.results).toEqual([])
+    expect(payload).toEqual([])
   })
 
   test('should return only one user', async () => {
-    const user = await Tester.hasTag()
+    const user = await Tester.hasUser()
 
     const { statusCode, payload } = await Tester.request('GET', '/users')
 
     expect(statusCode).toEqual(200)
-    expect(payload.results).toHaveLength(1)
-    expect(payload.results).toContainObject({
+    expect(payload).toHaveLength(1)
+    expect(payload).toContainObject({
       id: user.id,
-      name: user.name
+      nickname: user.nickname,
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String)
     })
   })
 
   test('should return multiple users', async () => {
-    const tag1 = await Tester.hasTag()
-    const tag2 = await Tester.hasTag()
+    const [user1, user2] = await Tester.hasUsers(2)
 
     const { statusCode, payload } = await Tester.request('GET', '/users')
 
     expect(statusCode).toEqual(200)
-    expect(payload.results).toHaveLength(2)
-    expect(payload.results).toContainObject({
-      id: tag1.id,
-      name: tag1.name
+    expect(payload).toHaveLength(2)
+    expect(payload).toContainObject({
+      id: user1.id,
+      nickname: user1.nickname
     })
-    expect(payload.results).toContainObject({
-      id: tag2.id,
-      name: tag2.name
-    })
-  })
-
-  test('should be able to search & paginate the results', async () => {
-    const [tag1, , tag3] = await Promise.all([
-      Tester.hasTag('lol'),
-      Tester.hasTag('rotfl'),
-      Tester.hasTag('xDlol')
-    ])
-
-    const { statusCode, payload } = await Tester.request('GET', '/users', {
-      query: { page: 0, perPage: 10, query: 'lol' }
-    })
-
-    expect(statusCode).toEqual(200)
-    expect(payload.total).toEqual(2)
-    expect(payload.results).toHaveLength(2)
-    expect(payload.results).toContainObject({
-      id: tag1.id,
-      name: tag1.name
-    })
-    expect(payload.results).toContainObject({
-      id: tag3.id,
-      name: tag3.name
+    expect(payload).toContainObject({
+      id: user2.id,
+      nickname: user2.nickname
     })
   })
 
-  test('should be able to paginate the results', async () => {
-    await Promise.all([
-      Tester.hasTag('lol'),
-      Tester.hasTag('rotfl'),
-      Tester.hasTag('xDlol')
-    ])
+  // test('should be able to search & paginate the results', async () => {
+  //   const [tag1, , tag3] = await Promise.all([
+  //     Tester.hasTag('lol'),
+  //     Tester.hasTag('rotfl'),
+  //     Tester.hasTag('xDlol')
+  //   ])
 
-    const { statusCode, payload } = await Tester.request('GET', '/users', {
-      query: { page: 0, perPage: 2 }
-    })
+  //   const { statusCode, payload } = await Tester.request('GET', '/users', {
+  //     query: { page: 0, perPage: 10, query: 'lol' }
+  //   })
 
-    expect(statusCode).toEqual(200)
-    expect(payload.total).toEqual(3)
-    expect(payload.results).toHaveLength(2)
-  })
+  //   expect(statusCode).toEqual(200)
+  //   expect(payload.total).toEqual(2)
+  //   expect(payload.results).toHaveLength(2)
+  //   expect(payload.results).toContainObject({
+  //     id: tag1.id,
+  //     name: tag1.name
+  //   })
+  //   expect(payload.results).toContainObject({
+  //     id: tag3.id,
+  //     name: tag3.name
+  //   })
+  // })
+
+  // test('should be able to paginate the results', async () => {
+  //   await Promise.all([
+  //     Tester.hasTag('lol'),
+  //     Tester.hasTag('rotfl'),
+  //     Tester.hasTag('xDlol')
+  //   ])
+
+  //   const { statusCode, payload } = await Tester.request('GET', '/users', {
+  //     query: { page: 0, perPage: 2 }
+  //   })
+
+  //   expect(statusCode).toEqual(200)
+  //   expect(payload.total).toEqual(3)
+  //   expect(payload.results).toHaveLength(2)
+  // })
 })
 
 describe('POST /users', () => {

@@ -1,6 +1,6 @@
 const Joi = require('@hapi/joi')
 const { createUser } = require('../src/services/userService')
-const { getTags } = require('../src/readers/userReader')
+const { getUsers } = require('../src/readers/userReader')
 
 module.exports = [
   {
@@ -24,7 +24,7 @@ module.exports = [
       }
     },
     handler: async ({ db, query }, h) => {
-      return getTags(db, query)
+      return getUsers(db, query)
     }
   },
   {
