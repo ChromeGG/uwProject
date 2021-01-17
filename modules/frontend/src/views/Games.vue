@@ -3,16 +3,16 @@
     <v-row>
       <v-col>
         <v-btn color="primary" class="mb-2" @click="createNewGameTypeDialog = true">
-          Stwórz nowy typ gry
+          Dodaj rozgrywkę
         </v-btn>
         <v-dialog v-model="createNewGameTypeDialog" max-width="520">
           <v-card>
             <v-card-title>
-              Stwórz nowy typ gry
+              Dodaj rozgrywkę
             </v-card-title>
             <v-card-text>
               <v-form v-model="valid">
-                <v-text-field
+                <v-text-area
                   v-model.trim="name"
                   label="Nazwa"
                   counter="30"
