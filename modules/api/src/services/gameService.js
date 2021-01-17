@@ -2,6 +2,9 @@
 const Game = require('../models/GameType')
 
 exports.createGame = async (db, input) => {
+  // for (const iterator of input.users) {
+
+  // }
   // const result = schema.validate(input)
 
   // console.log(result)

@@ -17,6 +17,7 @@
                   label="Nazwa"
                   counter="30"
                   filled
+                  clearable
                   :rules="[
                     (v) => !!v || 'Nazwa jest wymagana',
                     (v) => !(v && v.length < 3) || 'Nazwa musi mieć przynajmniej 3 znaki',

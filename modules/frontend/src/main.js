@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify'
 import Home from './views/Home.vue'
 import Users from './views/Users.vue'
 import GameTypes from './views/GameTypes.vue'
+import Games from './views/Games.vue'
 import { format } from 'date-fns'
 
 Vue.use(VueRouter)
@@ -29,28 +30,11 @@ Vue.prototype.$http = Axios.create({
   transformResponse: [].concat(Axios.defaults.transformResponse, myTransformResponse)
 })
 
-// Vue.filter('parseCurrency', function(value) {
-//   if (value) {
-//     return parseFloat(value).toFixed(2)
-//   }
-// })
-
-// Vue.filter('formatDateTime', function(value) {
-//   if (value) {
-//     return format(new Date(value), 'dd-MM-yyyy hh:mm')
-//   }
-// })
-
-// Vue.filter('formatDate', function(value) {
-//   if (value) {
-//     return format(new Date(value), 'dd-MM-yyyy')
-//   }
-// })
-
 const routes = [
   { path: '/', component: Home },
   { path: '/users', component: Users },
   { path: '/game-types', component: GameTypes },
+  { path: '/games', component: Games },
   { path: '*', redirect: '/' }
 ]
 
