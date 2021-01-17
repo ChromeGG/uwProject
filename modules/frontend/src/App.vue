@@ -12,10 +12,8 @@
         />
 
         <v-btn id="btn" color="secondary" to="/">Home</v-btn>
-        <v-btn id="btn" color="secondary" to="/imports">Imports</v-btn>
-        <v-btn id="btn" color="secondary" to="/expenses">Expenses</v-btn>
         <v-btn id="btn" color="secondary" to="/users">Użytkownicy</v-btn>
-        <v-btn id="btn" color="secondary" to="/reports">Reports</v-btn>
+        <v-btn id="btn" color="secondary" to="/game-types">Typy gier</v-btn>
       </div>
     </v-app-bar>
     <router-view id="view" />

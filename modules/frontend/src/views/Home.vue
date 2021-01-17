@@ -58,7 +58,7 @@
         <p>Operation system: Ubuntu 18.04 LTS</p>
         <p align="center" fluid>
           Software:
-          <v-list v-list width="650">
+          <v-list width="650">
             <v-list-item>docker >= 19.03.5</v-list-item>
             <v-list-item>docker-compose >= 1.21.2</v-list-item>
             <v-list-item>node.js</v-list-item>
