@@ -2,14 +2,9 @@
   <v-app>
     <v-app-bar app color="indigo darken-3">
       <div class="d-flex align-center" height="100">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+        <v-icon large class="mr-4" color="white">
+          mdi-gamepad-variant-outline
+        </v-icon>
 
         <v-btn id="btn" color="secondary" to="/">Home</v-btn>
         <v-btn id="btn" color="secondary" to="/users">Użytkownicy</v-btn>

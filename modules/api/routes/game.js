@@ -38,6 +38,19 @@ module.exports = [
           gameTypeId: Joi.string()
             .required(),
           moves: Joi.string()
+            .required(),
+          date: Joi.date()
+            .required(),
+          users: Joi.array()
+            .items(
+              Joi.object({
+                id: Joi.string().required(),
+                place: Joi.number()
+                  .min(1)
+                  .required()
+              })
+            )
+            .min(1)
             .required()
         })
       }

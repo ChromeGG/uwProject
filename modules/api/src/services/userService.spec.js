@@ -15,6 +15,7 @@ describe('createUser', () => {
     expect(user).toMatchObject({
       nickname: 'Joe'
     })
+
     // const users = await Tester.grabFromDatabase('users')
     // console.log(users)
     // const expensesFromDB = await Tester.grabFromDatabase('expenses')

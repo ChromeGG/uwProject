@@ -15,6 +15,7 @@ class Game extends Base {
         id: { type: 'string' },
         gameTypesId: { type: 'string' },
         moves: { type: 'string' },
+        date: { type: 'date' },
         createdAt: { type: 'timestamp' },
         updatedAt: { type: 'timestamp' }
       }

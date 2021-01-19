@@ -88,25 +88,6 @@ export default {
       this.fetchData()
       this.createNewUserDialog = false
     }
-    // async tagDel(tagId) {
-    //   await this.$http.delete(`/tags/${tagId}`)
-    //   this.fetchData()
-    // },
-    // async changeTag(tagId, newTagName) {
-    //   try {
-    //     await this.$http.patch(`/tags/${tagId}`, {
-    //       name: `${newTagName}`
-    //     })
-    //     newTagName = ''
-    //     this.editTag = false
-    //     this.fetchData()
-    //   } catch (error) {
-    //     this.tagNameAlert = true
-    //     setTimeout(() => {
-    //       this.tagNameAlert = false
-    //     }, 3000)
-    //   }
-    // }
   }
 }
 </script>
