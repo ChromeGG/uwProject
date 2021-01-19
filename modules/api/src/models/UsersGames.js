@@ -6,7 +6,7 @@ class UsersGames extends Base {
   }
 
   static get idColumn() {
-    return 'game_id';
+    return 'game_id'
   }
 
   static get jsonSchema() {
