@@ -1,4 +1,5 @@
 const Base = require('./Base')
+const { Model } = require('objection')
 
 class Rank extends Base {
   static get tableName() {
@@ -7,6 +8,21 @@ class Rank extends Base {
 
   static get idColumn() {
     return null
+  }
+
+  static get relationMappings() {
+    const User = require('./User')
+
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'ranks.user_id',
+          to: 'users.id'
+        }
+      }
+    }
   }
 
   static get jsonSchema() {

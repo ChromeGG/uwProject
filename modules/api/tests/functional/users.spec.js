@@ -41,46 +41,6 @@ describe('GET /users', () => {
       nickname: user2.nickname
     })
   })
-
-  // test('should be able to search & paginate the results', async () => {
-  //   const [tag1, , tag3] = await Promise.all([
-  //     Tester.hasTag('lol'),
-  //     Tester.hasTag('rotfl'),
-  //     Tester.hasTag('xDlol')
-  //   ])
-
-  //   const { statusCode, payload } = await Tester.request('GET', '/users', {
-  //     query: { page: 0, perPage: 10, query: 'lol' }
-  //   })
-
-  //   expect(statusCode).toEqual(200)
-  //   expect(payload.total).toEqual(2)
-  //   expect(payload.results).toHaveLength(2)
-  //   expect(payload.results).toContainObject({
-  //     id: tag1.id,
-  //     name: tag1.name
-  //   })
-  //   expect(payload.results).toContainObject({
-  //     id: tag3.id,
-  //     name: tag3.name
-  //   })
-  // })
-
-  // test('should be able to paginate the results', async () => {
-  //   await Promise.all([
-  //     Tester.hasTag('lol'),
-  //     Tester.hasTag('rotfl'),
-  //     Tester.hasTag('xDlol')
-  //   ])
-
-  //   const { statusCode, payload } = await Tester.request('GET', '/users', {
-  //     query: { page: 0, perPage: 2 }
-  //   })
-
-  //   expect(statusCode).toEqual(200)
-  //   expect(payload.total).toEqual(3)
-  //   expect(payload.results).toHaveLength(2)
-  // })
 })
 
 describe('POST /users', () => {

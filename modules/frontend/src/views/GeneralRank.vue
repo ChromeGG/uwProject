@@ -11,7 +11,7 @@
           :rules="[(v) => !!v || 'Typ gry jest wymagany']"
           return-object
           filled
-          @change="fetchRank"
+          @input="fetchRank"
         />
       </v-col>
     </v-row>
@@ -60,7 +60,7 @@ export default {
     async fetchRank() {
       const { data } = await this.$http.get('/rank', { gameTypeId: this.selectedGameType.id })
       console.log(data)
-      this.gameTypes = data
+      // this.rank = data
     }
   }
 }
