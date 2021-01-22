@@ -60,8 +60,7 @@ export default {
           text: 'Nazwa',
           value: 'nickname'
         },
-        { text: 'Stworzono', value: 'createdAt' },
-        { text: 'Zaktualizowano', value: 'updatedAt' }
+        { text: 'Stworzono', value: 'createdAt' }
       ],
       users: [],
       createNewUserDialog: false,
@@ -75,7 +74,6 @@ export default {
   methods: {
     async fetchData() {
       const { data } = await this.$http.get('/users')
-      // a
       this.users = data
     },
     async createNewUser() {

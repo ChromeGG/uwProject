@@ -11,15 +11,6 @@ module.exports = [
       description: 'Get all game types',
       tags: ['api'],
       validate: {
-        // query: Joi.object({
-        //   page: Joi.number()
-        //     .integer()
-        //     .optional(),
-        //   perPage: Joi.number()
-        //     .integer()
-        //     .optional(),
-        //   query: Joi.string().optional()
-        // })
       }
     },
     handler: async ({ db, query }, h) => {
@@ -62,44 +53,4 @@ module.exports = [
       return h.response(game).code(201)
     }
   }
-  // {
-  //   method: 'DELETE',
-  //   path: '/tags/{tagId}',
-  //   config: {
-  //     auth: false,
-  //     description: 'Delete tags',
-  //     notes: 'Delete tags',
-  //     tags: ['api'],
-  //     validate: {
-  //       params: Joi.object({
-  //         tagId: Joi.number().integer()
-  //       })
-  //     }
-  //   },
-  //   handler: async ({ db, params: { tagId } }, h) => {
-  //     await deleteTag(db, tagId)
-  //     return h.response().code(204)
-  //   }
-  // },
-  // {
-  //   method: 'PATCH',
-  //   path: '/tags/{tagId}',
-  //   config: {
-  //     auth: false,
-  //     description: 'Change tag name by its id',
-  //     notes: 'Change tag name',
-  //     tags: ['api'],
-  //     validate: {
-  //       params: Joi.object({
-  //         tagId: Joi.number().integer()
-  //       }),
-  //       payload: Joi.object({
-  //         name: Joi.string().required()
-  //       })
-  //     }
-  //   },
-  //   handler: async ({ db, params: { tagId }, payload: { name } }, h) => {
-  //     return updateTag(db, tagId, name)
-  //   }
-  // }
 ]

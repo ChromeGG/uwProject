@@ -6,6 +6,10 @@ class Game extends Base {
     return 'games'
   }
 
+  static get idColumn() {
+    return 'id'
+  }
+
   static get jsonSchema() {
     return {
       type: 'object',
@@ -24,14 +28,27 @@ class Game extends Base {
 
   static get relationMappings() {
     const GameType = require('./GameType')
+    const User = require('./User')
 
     return {
-      gameTypes: {
+      gameType: {
         relation: Model.BelongsToOneRelation,
         modelClass: GameType,
         join: {
           from: 'games.game_types_id',
           to: 'game_types.id'
+        }
+      },
+      users: {
+        relation: Model.ManyToManyRelation,
+        modelClass: User,
+        join: {
+          from: 'games.id',
+          through: {
+            from: 'users_games.game_id',
+            to: 'users_games.user_id'
+          },
+          to: 'users.id'
         }
       }
     }

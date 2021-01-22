@@ -94,7 +94,13 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" />
+        <v-data-table :headers="headers" :items="games">
+          <template v-slot:item.users="{ item }">
+            <v-chip v-for="user in item.users" :key="user.id">
+              {{ user.nickname }}
+            </v-chip>
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
   </v-container>
@@ -116,11 +122,15 @@ export default {
         },
         {
           text: 'Uczestnicy',
-          value: 'weight'
+          value: 'users'
         },
-        { text: 'Stworzono', value: 'createdAt' },
-        { text: 'Zaktualizowano', value: 'updatedAt' }
+        {
+          text: 'Data',
+          value: 'date'
+        },
+        { text: 'Stworzono', value: 'createdAt' }
       ],
+      games: [],
       createNewGameDialog: false,
       gameTypes: [],
       selectedGameType: null,
@@ -172,8 +182,9 @@ export default {
   },
   methods: {
     async fetchGames() {
-      const { data } = await this.$http.get('/users')
-      this.users = data
+      const { data } = await this.$http.get('/games')
+      console.log(data)
+      this.games = data
     },
     async fetchUsers() {
       const { data } = await this.$http.get('/users')

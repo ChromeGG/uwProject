@@ -84,24 +84,6 @@ describe('GET /users', () => {
 })
 
 describe('POST /users', () => {
-  // test('should validate payload', async () => {
-  //   const { statusCode, payload } = await Tester.request('POST', '/users', {
-  //     payload: {
-  //       lol: 'testTag'
-  //     }
-  //   })
-
-  //   expect(statusCode).toEqual(422)
-  //   expect(payload).toMatchObject({
-  //     errors: {
-  //       lol: ['"lol" is not allowed'],
-  //       name: ['"name" is required']
-  //     },
-  //     message: 'Unprocessable Entity',
-  //     statusCode: 422
-  //   })
-  // })
-
   test('should create new user', async () => {
     const { statusCode, payload } = await Tester.request('POST', '/users', {
       payload: {

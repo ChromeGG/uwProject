@@ -3,5 +3,6 @@ module.exports = db => ({
   ...require('./expenses')(db),
   ...require('./users')(db),
   ...require('./gameTypes')(db),
-  ...require('./ranks')(db)
+  ...require('./ranks')(db),
+  ...require('./games')(db)
 })

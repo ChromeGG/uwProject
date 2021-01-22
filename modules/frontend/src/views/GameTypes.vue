@@ -79,8 +79,7 @@ export default {
           text: 'Waga(%)',
           value: 'weight'
         },
-        { text: 'Stworzono', value: 'createdAt' },
-        { text: 'Zaktualizowano', value: 'updatedAt' }
+        { text: 'Stworzono', value: 'createdAt' }
       ],
       gameTypes: [],
       createNewGameTypeDialog: false,

@@ -1,18 +1,15 @@
-const GameTypes = require('../models/GameType')
+const Game = require('../models/Game')
 
-exports.getGameTypes = async (db, query) => {
-  const gameTypes = await GameTypes.query(db).select('*').orderBy('id', 'ASC')
-  if (!gameTypes.length) {
+exports.getGames = async (db, query) => {
+  const games = await Game.query(db)
+    .select('*')
+    .withGraphJoined('gameType')
+    .withGraphJoined('users')
+    .orderBy('games.id', 'ASC')
+  console.log(games)
+  if (!games.length) {
     return []
   }
 
-  // gameTypes.weight = gameTypes.weight * 100
-  const results = gameTypes.map(({ id, name, weight, createdAt, updatedAt }) => {
-    return { id, name, createdAt, updatedAt, weight: weight * 100 }
-  })
-  // if (query) {
-  //   users.where('nickname', 'like', `%${query}%`)
-  // }
-
-  return results
+  return games
 }
