@@ -6,6 +6,10 @@ class Game extends Base {
     return 'ranks'
   }
 
+  static get idColumn() {
+    return null
+  }
+
   static get jsonSchema() {
     return {
       type: 'object',

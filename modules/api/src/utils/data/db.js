@@ -1,7 +1,7 @@
 const { is, isNil } = require('ramda')
 
 module.exports = db => {
-  const grabFromDatabase = async (table, condition = {}, select = '*') => {
+  const grabFromDatabase = async (table, condition = {}, select = '*', orderBy = 'id') => {
     if (is(Object, table)) {
       table = table.getTableName()
     }
@@ -10,7 +10,7 @@ module.exports = db => {
       .getKnex()
       .from(table)
       .where(condition)
-      .orderBy('id')
+      .orderBy(orderBy)
       .select(select)
   }
 

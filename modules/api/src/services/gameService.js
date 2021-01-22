@@ -59,7 +59,6 @@ exports.createGame = async (db, { gameTypeId, date, moves, users }) => {
     sortedByPlace[i].rank = Math.round(currentRank)
   }
 
-  console.log(date)
   const game = await Game.query(db).insert({ gameTypesId: gameTypeId, moves, date })
   const sortedByPlaceWithoutRank = sortedByPlace.map((user) => {
     return { gameId: game.id, userId: user.id, place: user.place }
@@ -67,16 +66,21 @@ exports.createGame = async (db, { gameTypeId, date, moves, users }) => {
 
   await UsersGames.query(db).insert(sortedByPlaceWithoutRank)
 
+  // Update ranks
   for (const user of usersWithRanks) {
     const { rank } = sortedByPlace.find(({ id }) => user.id === id)
-    await Rank.query(db)
+    const asd = await Rank.query(db)
       .update({ rank })
       .where({ userId: user.id })
       .where({ gameTypeId })
   }
 
-  for (const user of usersWithRanks) {
+  // Insert new ranks
+  for (const user of userWithoutRanks) {
     const { rank } = sortedByPlace.find(({ id }) => user.id === id)
-    await Rank.query(db).insert({ rank, userId: user.id, gameTypeId })
+    const asd = await Rank.query(db).insert({ rank, userId: user.id, gameTypeId }).select('rank')
+    console.log(asd)
   }
+
+  return game
 }

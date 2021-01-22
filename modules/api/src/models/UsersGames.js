@@ -17,7 +17,7 @@ class UsersGames extends Base {
       properties: {
         gameId: { type: 'string' },
         userId: { type: 'string' },
-        number: { type: 'number' }
+        place: { type: 'number' }
       }
     }
   }
