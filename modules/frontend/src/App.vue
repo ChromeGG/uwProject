@@ -10,6 +10,8 @@
         <v-btn id="btn" color="secondary" to="/users">Użytkownicy</v-btn>
         <v-btn id="btn" color="secondary" to="/game-types">Typy gier</v-btn>
         <v-btn id="btn" color="secondary" to="/games">Rozgrywki</v-btn>
+        <v-btn id="btn" color="secondary" to="/ranks">Rankingi szczegółowe</v-btn>
+        <v-btn id="btn" color="secondary" to="/general-rank">Ranking ogólny</v-btn>
       </div>
     </v-app-bar>
     <router-view id="view" />
