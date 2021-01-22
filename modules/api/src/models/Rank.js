@@ -1,7 +1,6 @@
 const Base = require('./Base')
-const { Model } = require('objection')
 
-class Game extends Base {
+class Rank extends Base {
   static get tableName() {
     return 'ranks'
   }
@@ -24,21 +23,6 @@ class Game extends Base {
       }
     }
   }
-
-  // static get relationMappings() {
-  //   const GameType = require('./GameType')
-
-  //   return {
-  //     gameTypes: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: GameType,
-  //       join: {
-  //         from: 'games.game_types_id',
-  //         to: 'game_types.id'
-  //       }
-  //     }
-  //   }
-  // }
 }
 
-module.exports = Game
+module.exports = Rank

@@ -6,6 +6,7 @@ class UsersGames extends Base {
   }
 
   static get idColumn() {
+    // TODO probably should be NULL !!!
     return 'game_id'
   }
 

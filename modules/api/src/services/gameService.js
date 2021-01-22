@@ -24,9 +24,12 @@ exports.createGame = async (db, { gameTypeId, date, moves, users }) => {
   const usersWithFilledRanks = []
   const userWithoutRanks = []
   for (const user of users) {
-    if (!usersWithRanks.some(({ id }) => id === user.id)) {
+    if (!usersWithRanks.some(({ userId }) => userId === user.id)) {
       user.rank = DEFAULT_GAME_RANK
       userWithoutRanks.push(user)
+    } else {
+      const { rank } = usersWithRanks.find(({ userId }) => userId === user.id)
+      user.rank = rank
     }
     usersWithFilledRanks.push({ id: user.id, rank: user.rank })
   }
@@ -39,19 +42,18 @@ exports.createGame = async (db, { gameTypeId, date, moves, users }) => {
 
   const completeUsersList = mergeById(users, usersWithFilledRanks)
 
-  const winningUser = completeUsersList.find(({ place }) => place === 1)
-
-  const weight = await GameType.query(db)
+  const { weight } = await GameType.query(db)
     .select('weight')
     .first({ id: gameTypeId })
 
   const sortedByPlace = completeUsersList.sort((a, b) => (a.place > b.place ? 1 : b.place > a.place ? -1 : 0))
 
+  const BONUS = 50
   for (let i = 0; i <= sortedByPlace.length - 1; i++) {
-    let currentRank = sortedByPlace[i].rank + 50 / (i + 1)
+    let currentRank = sortedByPlace[i].rank + BONUS / (i + 1)
     for (let j = i + 1; j < sortedByPlace.length; j++) {
       if (currentRank < sortedByPlace[j].rank) {
-        const difference = (currentRank - sortedByPlace[j].rank) * weight
+        const difference = Math.abs((currentRank - sortedByPlace[j].rank) * weight)
         currentRank += difference
         sortedByPlace[j].rank -= difference
       }
@@ -68,18 +70,19 @@ exports.createGame = async (db, { gameTypeId, date, moves, users }) => {
 
   // Update ranks
   for (const user of usersWithRanks) {
-    const { rank } = sortedByPlace.find(({ id }) => user.id === id)
-    const asd = await Rank.query(db)
-      .update({ rank })
-      .where({ userId: user.id })
+    const { rank } = sortedByPlace.find(({ id }) => user.userId === id)
+
+    await Rank.query(db)
+      .patch({ rank })
+      .where({ userId: user.userId })
       .where({ gameTypeId })
   }
 
-  // Insert new ranks
   for (const user of userWithoutRanks) {
     const { rank } = sortedByPlace.find(({ id }) => user.id === id)
-    const asd = await Rank.query(db).insert({ rank, userId: user.id, gameTypeId }).select('rank')
-    console.log(asd)
+    await Rank.query(db)
+      .insert({ rank, userId: user.id, gameTypeId })
+      .select('rank')
   }
 
   return game
