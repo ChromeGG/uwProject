@@ -147,21 +147,22 @@ export default {
   },
   computed: {
     avaibleUsers() {
-      const { users, selectedUsers } = this
+      // const { users, selectedUsers } = this
       // console.log(users)
-      // console.log(selectedUsers)
-      const avaibles = []
-      // FIXME
-      for (const user of users) {
-        // console.log(user)
-        if (selectedUsers.some(({ id }) => id === user.id)) {
-          avaibles.push(user)
-        }
-      }
-      console.log(avaibles)
-      console.log('------------------')
-      // console.log(selectedUsers)
-      return avaibles
+      // // console.log(selectedUsers)
+      // const avaibles = []
+      // // FIXME
+      // for (const user of users) {
+      //   // console.log(user)
+      //   if (selectedUsers.some(({ id }) => id === user.id)) {
+      //     avaibles.push(user)
+      //   }
+      // }
+      // console.log(avaibles)
+      // console.log('------------------')
+      // // console.log(selectedUsers)
+      // return avaibles
+      return this.users
     }
   },
   created() {
@@ -183,33 +184,27 @@ export default {
       this.gameTypes = data
     },
     async createNewGame() {
-      const { gameType, selectedUsers } = this
-      console.log(selectedUsers)
-      const asd = {
-        gameTypeId: gameType.id,
-        users: [
-          {
-            userId: '1',
-            place: 1
-          },
-          {
-            userId: '3',
-            place: 2
-          },
-          {
-            userId: '2',
-            place: 3
-          }
-        ]
+      const { selectedGameType, selectedUsers, date, moves } = this
+      const users = []
+      for (const { id, place } of selectedUsers) {
+        users.push({ id, place })
       }
-      console.log(asd)
-      // try {
-      //   await this.$http.post(`/game-types`, { name, weight })
-      // } catch (error) {
-      //   console.log(error)
-      // }
-      // this.fetchData()
-      // this.createNewGameDialog = false
+      console.log(users)
+      console.log(selectedGameType)
+      const result = {
+        gameTypeId: selectedGameType.id,
+        users,
+        date,
+        moves
+      }
+      console.log(result)
+      try {
+        await this.$http.post(`/games`, result)
+      } catch (error) {
+        console.log(error)
+      }
+      this.fetchGames()
+      this.createNewGameDialog = false
     },
     addUser() {
       const { selectedUser, place } = this

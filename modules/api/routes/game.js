@@ -5,7 +5,7 @@ const { getGames } = require('../src/readers/gameReader')
 module.exports = [
   {
     method: 'GET',
-    path: '/game-types',
+    path: '/games',
     config: {
       auth: false,
       description: 'Get all game types',
@@ -28,10 +28,10 @@ module.exports = [
   },
   {
     method: 'POST',
-    path: '/game-types',
+    path: '/games',
     config: {
       auth: false,
-      description: 'Creating an user',
+      description: 'Creating an game with game type, users, moves and date',
       tags: ['api'],
       validate: {
         payload: Joi.object({
@@ -50,15 +50,16 @@ module.exports = [
                   .required()
               })
             )
-            .min(1)
+            .min(2)
             .required()
         })
       }
     },
     handler: async ({ db, payload }, h) => {
-      const user = await createGame(db, payload)
+      const game = await createGame(db, payload)
+      console.log(game)
 
-      return h.response(user).code(201)
+      return h.response(game).code(201)
     }
   }
   // {
