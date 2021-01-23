@@ -8,14 +8,24 @@
         <h2 class="headline font-weight-bold mb-3">Opis</h2>
         <div class="subheading font-weight-regular">
           Games stats to prosta aplikacja webowa z bazą danych.
-          <br>
+          <br >
           Możemy dodawać użytkowników i typy gier.
-          <br>
+          <br >
           Użytkownicy mogą dodawać rozegrane gry między sobą.
-          <br>
+          <br >
           Na podstawie zajętych miejsc wyliczany jest ranking.
-          <br>
-          <code> Ranking = ???</code>
+          <br >
+          <code>
+            <pre>
+            Ranking_formula
+            currentRanking + 50 / place
+            for i in range(number_of_players):
+              for j in range(i + 1, number_of_players):
+                if (loser_ranking > current_player_ranking):
+                current_player_ranking += difference * WEIGHT
+                loser_player _ranking -= difference * WEIGHT
+            </pre>
+          </code>
         </div>
       </v-flex>
     </v-layout>

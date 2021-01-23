@@ -17,7 +17,6 @@ module.exports = [
       }
     },
     handler: async ({ db, query }, h) => {
-      console.log(query)
       return getRank(db, query)
     }
   }

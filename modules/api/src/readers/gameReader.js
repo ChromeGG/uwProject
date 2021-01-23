@@ -6,7 +6,6 @@ exports.getGames = async (db, query) => {
     .withGraphJoined('gameType')
     .withGraphJoined('users')
     .orderBy('games.id', 'ASC')
-  console.log(games)
   if (!games.length) {
     return []
   }

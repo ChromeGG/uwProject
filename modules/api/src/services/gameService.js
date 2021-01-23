@@ -61,6 +61,7 @@ exports.createGame = async (db, { gameTypeId, date, moves, users }) => {
     sortedByPlace[i].rank = Math.round(currentRank)
   }
 
+
   const game = await Game.query(db).insert({ gameTypesId: gameTypeId, moves, date })
   const sortedByPlaceWithoutRank = sortedByPlace.map((user) => {
     return { gameId: game.id, userId: user.id, place: user.place }
