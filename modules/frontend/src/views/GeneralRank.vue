@@ -17,13 +17,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" :items="rank">
-          <!-- <template v-slot:item.users="{ item }">
-            <v-chip v-for="user in item.users" :key="user.id">
-              {{ user.nickname }}
-            </v-chip>
-          </template> -->
-        </v-data-table>
+        <v-data-table :headers="headers" :items="rank"/>
       </v-col>
     </v-row>
   </v-container>

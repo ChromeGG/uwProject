@@ -1,18 +1,19 @@
 const Ranks = require('../models/Rank')
 
 exports.getRank = async (db, query) => {
-  console.log(query)
-  // FIX IT
-  const rank = await Ranks.query(db).select('*').withGraphJoined('user').where({ gameTypeId: query.gameTypeId })
+  const queryRank = Ranks.query(db)
+    .select('nickname', 'rank')
+    .join('users', 'ranks.user_id', 'users.id')
+
+  if (query) {
+    queryRank.where({ gameTypeId: query.gameTypeId })
+  }
+
+  const rank = await queryRank
+
   if (!rank) {
     return []
   }
-
-  console.log(rank)
-
-  // if (query) {
-  //   users.where('nickname', 'like', `%${query}%`)
-  // }
 
   return rank
 }

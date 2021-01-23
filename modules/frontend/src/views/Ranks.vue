@@ -17,13 +17,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" :items="rank">
-          <!-- <template v-slot:item.users="{ item }">
-            <v-chip v-for="user in item.users" :key="user.id">
-              {{ user.nickname }}
-            </v-chip>
-          </template> -->
-        </v-data-table>
+        <v-data-table :headers="headers" :items="rank"/>
       </v-col>
     </v-row>
   </v-container>
@@ -36,12 +30,12 @@ export default {
     return {
       headers: [
         {
-          text: 'Użytkownik',
-          value: 'users'
-        },
-        {
           text: 'Wynik',
           value: 'rank'
+        },
+        {
+          text: 'Użytkownik',
+          value: 'nickname'
         }
       ],
       gameTypes: [],
@@ -58,9 +52,8 @@ export default {
       this.gameTypes = data
     },
     async fetchRank() {
-      const { data } = await this.$http.get('/rank', { gameTypeId: this.selectedGameType.id })
-      console.log(data)
-      this.gameTypes = data
+      const { data } = await this.$http.get('/rank', { params: { gameTypeId: this.selectedGameType.id } })
+      this.rank = data
     }
   }
 }
