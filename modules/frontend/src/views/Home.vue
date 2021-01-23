@@ -18,21 +18,6 @@
           <code> Ranking = ???</code>
         </div>
       </v-flex>
-
-      <v-flex col-12>
-        <h2 class="headline font-weight-bold mb-3">Przydatne komendy</h2>
-        <code>
-          ./dev start <br >
-          ./dev stop <br >
-          ./dev logs <br >
-          ./dev logs &#60;app/db&#62; <br >
-          ./dev reset <br >
-          ./dev restart <br >
-          ./dev ps <br >
-          ./dev yarn knex <br >
-          ./dev yarn test <br >
-        </code>
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
