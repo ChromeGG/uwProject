@@ -3,20 +3,24 @@
     <v-layout text-center wrap align-center justify-center column fill-height>
       <v-flex col-12>
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Karta Kredytowa
+          Games Stats
         </h1>
-        <h2 class="headline font-weight-bold mb-3">Description</h2>
-        <p class="subheading font-weight-regular">
-          It's a simple application, which can parse credit card statement from
-          mBank and spending analysis.
-          <br >
-          Test data are in folder
-          <code>./modules/api/tests/fixtures/</code>
-        </p>
+        <h2 class="headline font-weight-bold mb-3">Opis</h2>
+        <div class="subheading font-weight-regular">
+          Games stats to prosta aplikacja webowa z bazą danych.
+          <br>
+          Możemy dodawać użytkowników i typy gier.
+          <br>
+          Użytkownicy mogą dodawać rozegrane gry między sobą.
+          <br>
+          Na podstawie zajętych miejsc wyliczany jest ranking.
+          <br>
+          <code> Ranking = ???</code>
+        </div>
       </v-flex>
 
       <v-flex col-12>
-        <h2 class="headline font-weight-bold mb-3">Usefull command</h2>
+        <h2 class="headline font-weight-bold mb-3">Przydatne komendy</h2>
         <code>
           ./dev start <br >
           ./dev stop <br >
@@ -28,46 +32,6 @@
           ./dev yarn knex <br >
           ./dev yarn test <br >
         </code>
-      </v-flex>
-      <v-flex col-12 class="justify-center" justify-center>
-        <h2 class="headline font-weight-bold mb-3">Technical description</h2>
-        <p>
-          The project contains two modules, backend and frontend. Code is in one
-          repository (monorepo).
-        </p>
-        <p>
-          Backend is using <a href="https://hapi.dev/">hapi.js</a>. To
-          communicate with data base we are using
-          <a href="http://knexjs.org/"> knex</a> (as query builder) and
-          <a href="https://vincit.github.io/objection.js/">objection.js</a> (ORM
-          for knex).
-
-          truncate table users_games, ranks, games, game_types, users;
-          <br >
-        </p>
-        <p align="center">
-          Code is divided into few parts:
-          <v-list width="550" class="justify-center">
-            <v-list-item>readers - for communication with database (searching, paginations etc.),</v-list-item>
-            <v-list-item>services - for create, update and delete data,</v-list-item>
-            <v-list-item>tests - for tests (jest.js framework),</v-list-item>
-            <v-list-item>frontend - for frontend things  (vue.js).</v-list-item>
-          </v-list>
-        </p>
-      </v-flex>
-      <v-flex col-12>
-        <h2 class="headline font-weight-bold mb-3">Programming Environment</h2>
-        <p>Operation system: Ubuntu 18.04 LTS</p>
-        <p align="center" fluid>
-          Software:
-          <v-list width="650">
-            <v-list-item>docker >= 19.03.5</v-list-item>
-            <v-list-item>docker-compose >= 1.21.2</v-list-item>
-            <v-list-item>node.js</v-list-item>
-            <v-list-item>VSCode</v-list-item>
-            <v-list-item>Optional software for connecting to DB, if you won't use PSQL(dbeaver, pgmodeler)</v-list-item>
-          </v-list>
-        </p>
       </v-flex>
     </v-layout>
   </v-container>
