@@ -42,11 +42,11 @@ Programy:
 
 Projekt dzieli się na dwa moduły (backend i frontend). Cały kod przechowywany jest w jednym repozytorium (tzw. monorepo).
 
-Backend wykorzystuje framework hapi.js (https://hapi.dev/). Do komunikacji z bazą danych PostgreSQL używamy knex (query builder http://knexjs.org/) i objection.js (ORM dla knex'a https://vincit.github.io/objection.js/).
+Backend wykorzystuje framework hapi.js (https://hapi.dev/). Do komunikacji z bazą danych PostgreSQL używam knex (query builder http://knexjs.org/) i objection.js (ORM dla knex'a https://vincit.github.io/objection.js/).
 Cały kod podzielony jest na kilka części:
 - readers - kod, który służy tylko do oczytu danych z bazy (wyszukiwanie, paginacje itp.)
 - services - kod, który służy do zapisu danych w bazie danych (chcemy mieć tylo 1 sposób na tworzenie, uaktualniania i kasowanie danych)
 - tesy - framework jest.js
 
 Frontend
-Vue 2.6 z Vuetify 
+Vue 2.6 z Vuetify

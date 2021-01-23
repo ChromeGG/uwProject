@@ -58,7 +58,7 @@
                 <v-data-table :headers="selectedUsersHeaders" :items="selectedUsers" hide-default-footer>
                   <template v-slot:top>
                     <v-toolbar flat>
-                      <v-toolbar-title @click="log()">Uczestnicy</v-toolbar-title>
+                      <v-toolbar-title>Uczestnicy</v-toolbar-title>
                       <v-divider class="mx-4" inset vertical />
                       <v-btn color="primary" class="ml-auto" @click="addUserDialog = true">
                         Dodaj uczestnika
@@ -192,7 +192,6 @@ export default {
   methods: {
     async fetchGames() {
       const { data } = await this.$http.get('/games')
-      console.log(data)
       this.games = data
     },
     async fetchUsers() {
@@ -209,15 +208,14 @@ export default {
       for (const { id, place } of selectedUsers) {
         users.push({ id, place })
       }
-      console.log(users)
-      console.log(selectedGameType)
+
       const result = {
         gameTypeId: selectedGameType.id,
         users,
         date,
         moves
       }
-      console.log(result)
+
       try {
         await this.$http.post(`/games`, result)
       } catch (error) {
@@ -228,14 +226,11 @@ export default {
     },
     addUser() {
       const { selectedUser, place } = this
-      console.log(selectedUser)
+
       this.selectedUsers.push({ nickname: selectedUser.nickname, place, id: selectedUser.id })
       this.place++
       this.addUserDialog = false
       this.selectedUser = null
-    },
-    log() {
-      console.log(this.avaibleUsers)
     }
   }
 }

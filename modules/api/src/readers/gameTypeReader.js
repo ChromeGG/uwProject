@@ -10,9 +10,5 @@ exports.getGameTypes = async (db, query) => {
     return { id, name, createdAt, updatedAt, weight: weight * 100 }
   })
 
-  // if (query) {
-  //   users.where('nickname', 'like', `%${query}%`)
-  // }
-
   return results
 }

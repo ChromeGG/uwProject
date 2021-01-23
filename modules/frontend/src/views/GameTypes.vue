@@ -94,7 +94,6 @@ export default {
   methods: {
     async fetchData() {
       const { data } = await this.$http.get('/game-types')
-      // a
       this.gameTypes = data
     },
     async createNewGametype() {
@@ -107,25 +106,6 @@ export default {
       this.fetchData()
       this.createNewGameTypeDialog = false
     }
-    // async tagDel(tagId) {
-    //   await this.$http.delete(`/tags/${tagId}`)
-    //   this.fetchData()
-    // },
-    // async changeTag(tagId, newTagName) {
-    //   try {
-    //     await this.$http.patch(`/tags/${tagId}`, {
-    //       name: `${newTagName}`
-    //     })
-    //     newTagName = ''
-    //     this.editTag = false
-    //     this.fetchData()
-    //   } catch (error) {
-    //     this.tagNameAlert = true
-    //     setTimeout(() => {
-    //       this.tagNameAlert = false
-    //     }, 3000)
-    //   }
-    // }
   }
 }
 </script>
