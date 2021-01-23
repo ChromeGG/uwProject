@@ -100,6 +100,11 @@
               {{ user.nickname }}
             </v-chip>
           </template>
+          <!-- <template v-slot:item.moves="{ item }">
+            <v-dialog v-model="openDialog">
+              <div>{{ item.moves }}</div>
+            </v-dialog>
+          </template> -->
         </v-data-table>
       </v-col>
     </v-row>
@@ -123,6 +128,10 @@ export default {
         {
           text: 'Uczestnicy',
           value: 'users'
+        },
+        {
+          text: 'Ruchy',
+          value: 'moves'
         },
         {
           text: 'Data',

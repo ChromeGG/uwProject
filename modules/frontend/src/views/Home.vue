@@ -41,6 +41,8 @@
           <a href="http://knexjs.org/"> knex</a> (as query builder) and
           <a href="https://vincit.github.io/objection.js/">objection.js</a> (ORM
           for knex).
+
+          truncate table users_games, ranks, games, game_types, users;
           <br >
         </p>
         <p align="center">

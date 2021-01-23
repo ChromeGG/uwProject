@@ -18,7 +18,7 @@ module.exports = {
       table
         .foreign('game_types_id')
         .references('game_types.id')
-      table.string('moves').notNullable()
+      table.text('moves').notNullable()
       table.timestamp('created_at', { useTz: false }).defaultTo(knex.fn.now())
       table.timestamp('updated_at', { useTz: false }).defaultTo(knex.fn.now())
       table.comment('Table games is used to store all played games')
