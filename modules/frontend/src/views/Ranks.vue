@@ -17,7 +17,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" :items="rank"/>
+        <v-data-table :headers="headers" :items="rank" :sort-by="['rank']" :sort-desc="[true]"/>
       </v-col>
     </v-row>
   </v-container>
