@@ -65,7 +65,7 @@ exports.seed = async (knex) => {
       created_at: new Date('2019-11-06')
     },
     {
-      game_types_id: '3',
+      game_types_id: '1',
       moves: `1. e4 e5
       2. Nf3 d6
       3. d4 Bg4

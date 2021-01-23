@@ -2,8 +2,11 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-btn color="primary" class="mb-2" @click="createNewGameDialog = true">
+        <v-btn color="primary" @click="createNewGameDialog = true">
           Dodaj rozgrywkę
+        </v-btn>
+        <v-btn color="primary" class="ml-2" @click="expandMoves = !expandMoves">
+          {{ expandMoves ? 'Ukryj ruchy' : 'Pokaż ruchy' }}
         </v-btn>
         <v-dialog v-model="createNewGameDialog" max-width="600">
           <v-card>
@@ -84,7 +87,7 @@
               <v-btn @click="createNewGameDialog = false">
                 Anuluj
               </v-btn>
-              <v-btn color="primary" :disabled="!valid" @click="createNewGame()">
+              <v-btn color="primary" :disabled="!valid || selectedUsers.length < 2" @click="createNewGame()">
                 Stwórz
               </v-btn>
             </v-card-actions>
@@ -100,11 +103,14 @@
               {{ user.nickname }}
             </v-chip>
           </template>
-          <!-- <template v-slot:item.moves="{ item }">
-            <v-dialog v-model="openDialog">
-              <div>{{ item.moves }}</div>
-            </v-dialog>
-          </template> -->
+          <template v-slot:item.moves="{ item }">
+            <div style="max-width: 150px;" :class="{ 'text-truncate': !expandMoves, 'text-pre-wrap': expandMoves }">
+              {{ item.moves }}
+            </div>
+          </template>
+          <template v-slot:item.date="{ item, value }">
+            {{ item.date.substring(0, 10) }}
+          </template>
         </v-data-table>
       </v-col>
     </v-row>
@@ -159,6 +165,7 @@ export default {
       selectedUsers: [],
       selectedUser: null,
       moves: null,
+      expandMoves: false,
       date: new Date().toISOString().substr(0, 10),
       valid: false,
       userValidation: false
@@ -166,22 +173,14 @@ export default {
   },
   computed: {
     avaibleUsers() {
-      // const { users, selectedUsers } = this
-      // console.log(users)
-      // // console.log(selectedUsers)
-      // const avaibles = []
-      // // FIXME
-      // for (const user of users) {
-      //   // console.log(user)
-      //   if (selectedUsers.some(({ id }) => id === user.id)) {
-      //     avaibles.push(user)
-      //   }
-      // }
-      // console.log(avaibles)
-      // console.log('------------------')
-      // // console.log(selectedUsers)
-      // return avaibles
-      return this.users
+      const { users, selectedUsers } = this
+      const avaibles = []
+      for (const user of users) {
+        if (!selectedUsers.some(({ id }) => id === user.id)) {
+          avaibles.push(user)
+        }
+      }
+      return avaibles
     }
   },
   created() {

@@ -8,7 +8,6 @@ import Users from './views/Users.vue'
 import GameTypes from './views/GameTypes.vue'
 import Games from './views/Games.vue'
 import Ranks from './views/Ranks.vue'
-import GeneralRank from './views/GeneralRank.vue'
 import { format } from 'date-fns'
 
 Vue.use(VueRouter)
@@ -38,7 +37,6 @@ const routes = [
   { path: '/game-types', component: GameTypes },
   { path: '/games', component: Games },
   { path: '/ranks', component: Ranks },
-  { path: '/general-rank', component: GeneralRank },
   { path: '*', redirect: '/' }
 ]
 
